@@ -1,19 +1,26 @@
 package Entities;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Alunos {
     
     private String nome;
-    private String sobrenome;
     private String sexo;
     private String dataDeNascimento;
     private String cpf;
+    private Integer numeroDeMatricula;
+    private LocalDateTime dataeHora;
 
-    public Alunos(String nome, String sobrenome, String sexo, String dataDeNascimento, String cpf) {
+    public Alunos(String nome, String sexo, String dataDeNascimento, 
+                  String cpf, Integer numeroDeMatricula, LocalDateTime dataeHora) {
+
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.sexo = sexo;
         this.dataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
+        this.numeroDeMatricula = numeroDeMatricula;
+        this.dataeHora = dataeHora;
     }
 
     public String getNome() {
@@ -21,12 +28,6 @@ public class Alunos {
     }
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public String getSobrenome() {
-        return sobrenome;
-    }
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
     public String getSexo() {
         return sexo;
@@ -46,5 +47,23 @@ public class Alunos {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    public Integer getNumeroDeMatricula() {
+        return numeroDeMatricula;
+    }
+    public void setNumeroDeMatricula(Integer numeroDeMatricula) {
+        this.numeroDeMatricula = numeroDeMatricula;
+    }
+    public LocalDateTime getDataeHora() {
+        return dataeHora;
+    }
+    public void setDataeHora(LocalDateTime dataeHora) {
+        this.dataeHora = dataeHora;
+    }
+
+    public String formato (){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String horario = dataeHora.format(formato);
+        return horario;
+    }       
     
 }

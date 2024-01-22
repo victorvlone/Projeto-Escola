@@ -3,14 +3,12 @@ package Entities;
 public class Professores {
     
     private String nome;
-    private String sobrenome;
     private String dataDeNascimento;
     private String cpf;
     private String disciplina;
     
-    public Professores(String nome, String sobrenome, String dataDeNascimento, String cpf, String disciplina) {
+    public Professores(String nome, String dataDeNascimento, String cpf, String disciplina) {
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.dataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
         this.disciplina = disciplina;
@@ -21,12 +19,6 @@ public class Professores {
     }
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public String getSobrenome() {
-        return sobrenome;
-    }
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
     public String getDataDeNascimento() {
         return dataDeNascimento;
