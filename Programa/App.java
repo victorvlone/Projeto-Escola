@@ -2,6 +2,7 @@ package Programa;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -77,16 +78,27 @@ public class App {
                     } else if(MenuCadastros.equals("2") && MenuCadastros.equals("PROFESSORES")){
 
                         System.out.println("\nCADASTRO DE PROFESSOR\n");
-                        System.out.print("Primeiro nome: ");
+                        System.out.print("Nome completo: ");
                         String nome = scanner.nextLine();
+                        System.out.print("Sexo: ");
+                        String sexo = scanner.nextLine();
+                        sexo = sexo.toUpperCase();
+
+                        while (!sexo.equals("MASCULINO") && !sexo.equals("FEMININO")) {
+                            System.out.print("Digite masculino ou feminino: ");
+                            sexo = scanner.nextLine();
+                            sexo = sexo.toUpperCase();
+                        }
+
                         System.out.print("Data de nascimento: ");
                         String dataDeNascimento = scanner.nextLine();
                         System.out.println("CPF: ");
                         String CPF = scanner.nextLine();
                         System.out.println("Disciplina: ");
                         String Disciplina = scanner.nextLine();
+                        LocalDateTime DataeHora = LocalDateTime.now();
 
-                        professores = new Professores(nome, dataDeNascimento, CPF, Disciplina);
+                        professores = new Professores(nome, sexo, dataDeNascimento, CPF, Disciplina, DataeHora);
                         listaProfessores.add(professores);
 
                         System.out.println("\nDigite 2 se deseja adicionar mais um");
@@ -116,20 +128,17 @@ public class App {
                 
             } else if (resposta.equals("LISTAS") || resposta.equals("1")) {
 
-                System.out.println("\n1. Alunos por ordem de matrícula");
-                System.out.println("2. Alunos por ordem alfabetica");
-                System.out.println("3. Alunos divididos por sexo\n");
-                System.out.println("4. Professores por ordem de inscrição");
-                System.out.println("5. Professores por ordem alfabetica");
-                System.out.println("6. professores divididos por sexo");
+                System.out.println("\n1. Alunos por ordem de matrícula     4. Professores por ordem de inscrição");
+                System.out.println("2. Alunos por ordem alfabetica         5. Professores por ordem alfabetica");
+                System.out.println("3. Alunos divididos por sexo           6. professores divididos por sexo");
                 System.out.println("7. Voltar\n");
 
                 System.out.print("Como deseja prosseguir? ");
                 String MenuListas = scanner.nextLine();
 
                 while (!MenuListas.equals("7")) {
+                    int i = 1;
                     if (MenuListas.equals("1")) {
-                        int i = 1;
                         for (Alunos aluno : listaAlunos) {
 
                             System.out.printf("\nDADOS DO %dº ALUNO\n", i);
@@ -145,8 +154,45 @@ public class App {
 
                         System.out.print("\nDigite 7 para voltar ao menu de listas: ");
                         MenuListas = scanner.nextLine();
-  
-                    }    
+
+                    } else if (MenuListas.equals("2")){
+                        Collections.sort(listaAlunos);
+                        System.out.printf("\nALUNOS POR ORDEM DE MATRICULA\n");
+
+                        for(Alunos aluno : listaAlunos){
+                            
+                        System.out.printf("\nNome completo: %s\n", aluno.getNome());
+                        System.out.println("Sexo: " + aluno.getSexo());
+                        System.out.println("Data de nascimento: " + aluno.getDataDeNascimento());
+                        System.out.println("CPF: " + aluno.getCpf());
+                        System.out.println("Número de matrícula: " + aluno.getNumeroDeMatricula());
+                        System.out.println("Cadastro realizado as " + aluno.formato());
+
+                        }
+
+                        System.out.print("\nDigite 7 para voltar ao menu de listas: ");
+                        MenuListas = scanner.nextLine();
+
+                    } else if (MenuListas.equals("3")){
+
+                    } else if (MenuListas.equals("4")){
+                        for (Professores professor : listaProfessores){
+
+                            System.out.printf("\nDADOS DO %dº PROFESSOR\n", i);
+                            System.out.printf("\nNome completo: %s\n", professor.getNome());
+                            System.out.println("Sexo: " + professor.getSexo());
+                            System.out.println("Data de nascimento: " + professor.getDataDeNascimento());
+                            System.out.println("CPF: " + professor.getCpf());
+                            System.out.println("Disciplina: " + professor.getDisciplina());
+                            System.out.println("Cadastro realizado as " + professor.formato());
+
+                            i++;
+                        }
+
+                        System.out.print("\nDigite 7 para voltar ao menu de listas: ");
+                        MenuListas = scanner.nextLine();
+
+                    }   
                 }
 
             }

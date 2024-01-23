@@ -3,7 +3,7 @@ package Entities;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Alunos {
+public class Alunos implements Comparable <Alunos> {
     
     private String nome;
     private String sexo;
@@ -64,6 +64,11 @@ public class Alunos {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String horario = dataeHora.format(formato);
         return horario;
-    }       
+    }
+    
+    @Override
+    public int compareTo(Alunos outroAluno) {
+        return this.nome.compareTo(outroAluno.nome);
+    }
     
 }
