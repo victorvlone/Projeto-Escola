@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import Entities.Alunos;
+import util.validações;
 import Entities.Professores;
 
 public class App {
@@ -42,8 +43,15 @@ public class App {
                     if (MenuCadastros.equals("1") || MenuCadastros.equals("ALUNOS")) {
 
                         System.out.println("\nCADASTRO DE ALUNO\n");
+
                         System.out.print("Nome completo: ");
                         String nome = scanner.nextLine();
+                        
+                        while (!validações.ValidacaoNome(nome)) {
+                            System.out.print("Digite apenas letras: ");
+                            nome = scanner.nextLine();
+                        }
+
                         System.out.print("Sexo: ");
                         String sexo = scanner.nextLine();
                         sexo = sexo.toUpperCase();
@@ -56,8 +64,20 @@ public class App {
                         
                         System.out.print("Data de nascimento: ");
                         String dataDeNascimento = scanner.nextLine();
+
+                        while (!validações.ValidacaoData(dataDeNascimento)) {
+                            System.out.print("A data não está no formato correto. Digite no formato dd/MM/yyyy: ");
+                            dataDeNascimento = scanner.nextLine();
+                        }
+
                         System.out.print("CPF: ");
                         String CPF = scanner.nextLine();
+
+                        while (!validações.ValidacaoCPF(CPF)) {
+                            System.out.print("CPF invalido! Digite apenas numeros: ");
+                            CPF = scanner.nextLine();
+                        }
+
                         Integer NdeMatricula = random.nextInt((int) Math.pow(10, 5));
                         LocalDateTime DataeHora = LocalDateTime.now();
 
@@ -78,8 +98,15 @@ public class App {
                     } else if(MenuCadastros.equals("2") && MenuCadastros.equals("PROFESSORES")){
 
                         System.out.println("\nCADASTRO DE PROFESSOR\n");
+
                         System.out.print("Nome completo: ");
                         String nome = scanner.nextLine();
+
+                        while (!validações.ValidacaoNome(nome)) {
+                            System.out.print("Digite apenas letras: ");
+                            nome = scanner.nextLine();
+                        }
+
                         System.out.print("Sexo: ");
                         String sexo = scanner.nextLine();
                         sexo = sexo.toUpperCase();
@@ -92,8 +119,20 @@ public class App {
 
                         System.out.print("Data de nascimento: ");
                         String dataDeNascimento = scanner.nextLine();
+
+                        while (!validações.ValidacaoData(dataDeNascimento)) {
+                            System.out.print("A data não está no formato correto. Digite no formato dd/MM/yyyy: ");
+                            dataDeNascimento = scanner.nextLine();
+                        }
+
                         System.out.println("CPF: ");
                         String CPF = scanner.nextLine();
+
+                        while (!validações.ValidacaoCPF(CPF)) {
+                            System.out.print("CPF invalido! Digite apenas numeros: ");
+                            CPF = scanner.nextLine();
+                        }
+                        
                         System.out.println("Disciplina: ");
                         String Disciplina = scanner.nextLine();
                         LocalDateTime DataeHora = LocalDateTime.now();
@@ -161,12 +200,12 @@ public class App {
 
                         for(Alunos aluno : listaAlunos){
                             
-                        System.out.printf("\nNome completo: %s\n", aluno.getNome());
-                        System.out.println("Sexo: " + aluno.getSexo());
-                        System.out.println("Data de nascimento: " + aluno.getDataDeNascimento());
-                        System.out.println("CPF: " + aluno.getCpf());
-                        System.out.println("Número de matrícula: " + aluno.getNumeroDeMatricula());
-                        System.out.println("Cadastro realizado as " + aluno.formato());
+                            System.out.printf("\nNome completo: %s\n", aluno.getNome());
+                            System.out.println("Sexo: " + aluno.getSexo());
+                            System.out.println("Data de nascimento: " + aluno.getDataDeNascimento());
+                            System.out.println("CPF: " + aluno.getCpf());
+                            System.out.println("Número de matrícula: " + aluno.getNumeroDeMatricula());
+                            System.out.println("Cadastro realizado as " + aluno.formato());
 
                         }
 
@@ -192,9 +231,28 @@ public class App {
                         System.out.print("\nDigite 7 para voltar ao menu de listas: ");
                         MenuListas = scanner.nextLine();
 
-                    }   
-                }
+                    }else if (MenuListas.equals("5")){
 
+                        Collections.sort(listaProfessores);
+                        System.out.printf("\nPROFESSORES POR ORDEM DE INSCRIÇÃO\n");
+
+                        for(Professores professor : listaProfessores){
+                            
+                            System.out.printf("\nDADOS DO %dº PROFESSOR\n", i);
+                            System.out.printf("\nNome completo: %s\n", professor.getNome());
+                            System.out.println("Sexo: " + professor.getSexo());
+                            System.out.println("Data de nascimento: " + professor.getDataDeNascimento());
+                            System.out.println("CPF: " + professor.getCpf());
+                            System.out.println("Disciplina: " + professor.getDisciplina());
+                            System.out.println("Cadastro realizado as " + professor.formato());
+
+                        }
+
+                        System.out.print("\nDigite 7 para voltar ao menu de listas: ");
+                        MenuListas = scanner.nextLine();
+
+                    }
+                }
             }
         }
 
